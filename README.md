@@ -7,9 +7,9 @@ application_filenames.txt:
 
 Tab-delimited list of application reference codes and output filenames. These will be used for the output filenames of the combined documents. Example:
 
-AJDK5462	Some_Application_John_Smith_AJDK5462
-SLE82654	Some_Application_Jim_John_SLE82654
-ALDJ2136	Some_Application_Elon_Musk_ALDJ2136
+AJDK5462	Some_Application_John_Smith_AJDK5462  
+SLE82654	Some_Application_Jim_John_SLE82654  
+ALDJ2136	Some_Application_Elon_Musk_ALDJ2136  
 
 document_order.txt:
 
