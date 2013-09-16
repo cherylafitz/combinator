@@ -15,25 +15,25 @@ document_order.txt:
 
 List of document identifiers in a given order. Matching documents will be sorted according to this order, nonmatching documents will be sorted, alphabetically, to the end. Example:
 
-Application
-UpResume
-UpPassport
-Recommendation
+Application  
+UpResume  
+UpPassport  
+Recommendation  
 
 documents_to_ignore.txt:
 
 List of document identifiers that can be ignored. This list will be matched against input document filenames; any matching filenames will be ignored. Example:
 
-UpADocumentToIgnore
-AndAnotherOne
+UpADocumentToIgnore  
+AndAnotherOne  
 
 recommendation_application_associations.txt:
 
 Tab-delimited list of reference codes. First column is recommendation reference codes, second column is application reference codes. Example:
 
-AJDK5462	SJDK2136
-SLE82654	SCIE9643
-ALDJ2136	POEU2146
+AJDK5462	SJDK2136  
+SLE82654	SCIE9643  
+ALDJ2136	POEU2146  
 
 2) Input documents, as PDF, into combinator/input
 
