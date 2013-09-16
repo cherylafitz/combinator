@@ -336,15 +336,17 @@ class UnknownOutputFilenameException(Exception):
 def main():
     try:
         os.mkdir("output")
-    except WindowsError:
+    except:
         pass
     configuration = Configuration()
     combinator = Combinator()
     documents = create_document_objects(configuration)
     for filename in os.listdir(configuration.get_input_directory()):
+        # Ignore hidden files like .gitignore
+        if filename[0] != ".":
         # configuration.get_input_directory()
-        document = find_document(filename, documents, configuration)
-        document.add_filename("".join([configuration.get_input_directory(),"/", filename]))
+            document = find_document(filename, documents, configuration)
+            document.add_filename("".join([configuration.get_input_directory(),"/", filename]))
     for document in documents:
         document.sort_filenames(configuration)
     encrypted_pdfs = find_all_encrypted_pdfs(documents)
@@ -355,3 +357,4 @@ def main():
         print("encrypted pdfs found:")
         for filename in encrypted_pdfs:
             print filename
+
