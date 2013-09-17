@@ -192,7 +192,10 @@ class Combinator(object):
             numPages = input_file.getNumPages()
             for page in range (numPages):
                 output.addPage(input_file.getPage(page))
+        # output_filename = "".join([self._output_directory, "/", document.get_output_filename()])
         output_filename = "".join([self._output_directory, "/", document.get_output_filename()])
+        if ".pdf" not in output_filename:
+            output_filename = "".join[output_filename,".pdf"]
         output_stream = file(output_filename, "wb")
         output.write(output_stream)
         output_stream.close()
