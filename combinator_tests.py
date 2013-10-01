@@ -1,4 +1,4 @@
-from combinator import Configuration, Document
+from combinator import Configuration, Document, should_be_ignored
 import unittest
 
 class Configuration_Tests(unittest.TestCase):
@@ -61,6 +61,12 @@ class Document_Tests(unittest.TestCase):
         assert self.document.get_applicant_reference_code() == "ABCD2356"
     def test_get_output_filename(self):
         assert self.document.get_output_filename() == "Some_Application_Neal_Knight_ABCD2356.pdf"
+
+class Should_Be_Ignored_Tests(unittest.TestCase):
+    def setUp(self):
+        self.configuration = Configuration("./test_config")
+    def test_should_be_ignored(self):
+        assert should_be_ignored("something_UpADocumentToIgnore_something",self.configuration) == True
 
 if __name__ == "__main__":
     unittest.main()

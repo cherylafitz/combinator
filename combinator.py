@@ -223,6 +223,7 @@ def create_document_objects(configuration):
     """
     based on configuration object, initializes document objects, returns as a list
     """
+    # print (configuration.get_documents_to_ignore())
     output_list = []
     filename_dict = configuration.get_application_filenames()
     for input_filename in filename_dict.keys():
@@ -231,6 +232,16 @@ def create_document_objects(configuration):
         document = Document(applicant_reference_code,output_filename)
         output_list.append(document)
     return output_list
+
+def should_be_ignored(filename, configuration):
+    """
+    return True if filename should be ignored, False otherwise
+    """
+    documents_to_ignore = configuration.get_documents_to_ignore()
+    for pattern in documents_to_ignore:
+        if pattern in filename:
+            return True
+    return False
 
 def find_document(filename, documents, configuration):
     """
@@ -317,6 +328,9 @@ def flatten_list(input_list):
     else:
         return [item for sublist in input_list for item in sublist]
 
+def do_nothing():
+    pass
+
 # Exceptions
 
 class NotImplementedException(Exception):
@@ -347,9 +361,9 @@ def main():
     for filename in os.listdir(configuration.get_input_directory()):
         # Ignore hidden files like .gitignore
         if filename[0] != ".":
-        # configuration.get_input_directory()
-            document = find_document(filename, documents, configuration)
-            document.add_filename("".join([configuration.get_input_directory(),"/", filename]))
+            if not should_be_ignored(filename, configuration):
+                document = find_document(filename, documents, configuration)
+                document.add_filename("".join([configuration.get_input_directory(),"/", filename]))
     for document in documents:
         document.sort_filenames(configuration)
     encrypted_pdfs = find_all_encrypted_pdfs(documents)
@@ -361,3 +375,7 @@ def main():
         for filename in encrypted_pdfs:
             print filename
 
+        # if should_be_ignored(input_filename, configuration):
+        #     do_nothing()
+        #     print("ignoring", input_filename)
+        # else:
